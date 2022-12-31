@@ -12,16 +12,22 @@ const connectDB = require('./database');
 // App Init
 const app = express();
 
-// Start APP
+// Start the server
 const startApp = async () => {
-    await connectDB();
+    try {
+        // Connect to DB
+        await connectDB();
 
-    await app.listen(APP_PORT, () => {
-        success({
-            message: `Server started on port ${APP_PORT}`,
-            badge: true
-        })
-    });
+        // Start listen port for the server
+        await app.listen(APP_PORT, () => {
+            success({
+                message: `Server started on port ${APP_PORT}`,
+                badge: true
+            })
+        });
+    } catch (err) {
+        startApp();
+    }
 };
 
 startApp();
