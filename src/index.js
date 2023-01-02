@@ -12,6 +12,14 @@ const connectDB = require('./database');
 // App Init
 const app = express();
 
+// Middlewares
+app.use(cors());
+app.use(bodyParser.json());
+
+// Routes Config
+const routes = require('./routes/index.routes');
+app.use('/api', routes);
+
 // Start the server
 const startApp = async () => {
     try {
@@ -26,6 +34,10 @@ const startApp = async () => {
             })
         });
     } catch (err) {
+        error({
+            message: `Server could not start!!! Error: ${err.message}`,
+            badge: true
+        });
         startApp();
     }
 };
