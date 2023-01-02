@@ -1,27 +1,14 @@
 const userRouter = require('express').Router();
+const {userRegister,userLogin} = require('../controllers/Auth');
 
 // User Registration Route
-userRouter.post('/register-user', async (req, res) => {
-});
-
-// Admin Registration Route
-userRouter.post('/register-admin', async (req, res) => {
-});
-
-// Super Registration Route
-userRouter.post('/register-super', async (req, res) => {
+userRouter.post('/register', async (req, res) => {
+    await userRegister(req.body, req.body.role, res);
 });
 
 // User Login Route
-userRouter.post('/login-user', async (req, res) => {
-});
-
-// Admin Login Route
-userRouter.post('/login-admin', async (req, res) => {
-});
-
-// Super Login Route
-userRouter.post('/login-super', async (req, res) => {
+userRouter.post('/login', async (req, res) => {
+    await userLogin(req.body, res);
 });
 
 // User Protected Route
