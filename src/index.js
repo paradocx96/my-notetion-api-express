@@ -17,7 +17,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes Config
-const routes = require('./routes/index.routes');
+const routes = require('./routes');
 app.use('/api', routes);
 
 // Start the server
