@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 const User = require('../models/User');
 const logger = require("../utils/logger");
 const {generateToken} = require('../utils/jwt')
@@ -113,6 +114,28 @@ const userLogin = async (userCredentials, res) => {
     }
 };
 
+// Passport middleware Get user
+const userAuthenticated = passport.authenticate('jwt', {session: false});
+
+// Serialize User Info (Reduce Password)
+const serializeUser = user => {
+    return {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+    };
+};
+
+// Check User role for RBAC
+const checkUserRole = roles => (req, res, next) =>
+    !roles.includes(req.user.role)
+        ? res.status(401).json('Unauthorized')
+        : next();
+
 // Validate username
 const validateUsername = async (username) => {
     let user = await User.findOne({username});
@@ -127,5 +150,8 @@ const validateEmail = async (email) => {
 
 module.exports = {
     userRegister,
-    userLogin
+    userLogin,
+    userAuthenticated,
+    serializeUser,
+    checkUserRole
 }
