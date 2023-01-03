@@ -1,9 +1,10 @@
 require("dotenv").config();
 
 module.exports = {
-    DB_URL: process.env.DB_URL,
+    APP_DB: process.env.APP_DB,
+    APP_DOMAIN: process.env.APP_DOMAIN,
     APP_PORT: process.env.APP_PORT,
-    SECRET: process.env.SECRET,
+    APP_SECRET: process.env.APP_SECRET,
     BCRYPT_SALT_ROUNDS: process.env.BCRYPT_SALT_ROUNDS,
     JWT_EXPIRE: process.env.JWT_EXPIRE,
     NODE_ENV: process.env.NODE_ENV

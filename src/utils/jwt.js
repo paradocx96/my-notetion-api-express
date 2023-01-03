@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
-const {SECRET, JWT_EXPIRE} = require('../config');
+const {APP_SECRET, JWT_EXPIRE} = require('../config');
 
 // Generate token
 const generateToken = (data) => {
     return jwt.sign(
         data,
-        SECRET,
+        APP_SECRET,
         {
             expiresIn: `${JWT_EXPIRE}`
         }
@@ -14,7 +14,7 @@ const generateToken = (data) => {
 
 // Decode token
 const decodeToken = (tokenData) => {
-    return jwt.verify(tokenData, SECRET);
+    return jwt.verify(tokenData, APP_SECRET);
 }
 
 module.exports = {

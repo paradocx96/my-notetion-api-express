@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const { success, error } = require('consola');
 
 // App Config
-const { DB_URL } = require('../config');
+const { APP_DB } = require('../config');
 
 // DB Config
 const connectDB = async () => {
     await mongoose.set('strictQuery', false);
 
-    await mongoose.connect(DB_URL, {
+    await mongoose.connect(APP_DB, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => {
