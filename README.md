@@ -1,4 +1,4 @@
-# Note Management API
+# Notes Management API
 
 |            |
 |------------|
