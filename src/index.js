@@ -1,16 +1,13 @@
 const cors = require('cors');
 const express = require('express');
-const bodyParser = require('body-parser');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const {success, error} = require('consola');
-
-// App Constants
+const routes = require('./routes');
 const {APP_PORT} = require('./config');
-
-// DB Config
 const connectDB = require('./database');
 
-// App Init
+// App Initialization
 const app = express();
 
 // Middlewares
@@ -18,11 +15,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
-// Passport Config
+// Passport Configuration
 require('./middlewares/passport')(passport);
 
-// Routes Config
-const routes = require('./routes');
+// Routes Configuration
 app.get('/', (req, res) =>
     res.status(200).json({message: 'NM-APP API Server Up & Running!!!'}));
 app.use('/api', routes);
