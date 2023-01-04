@@ -1,11 +1,12 @@
+import User from '../models/User';
+
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const User = require('../models/User');
 const logger = require("../utils/logger");
 const {generateToken} = require('../utils/jwt')
-const {BCRYPT_SALT_ROUNDS} = require('../config');
+const {BCRYPT_SALT_ROUNDS} = require('../constants');
 
-const userRegister = async (userData, role, res) => {
+export const userRegister = async (userData, role, res) => {
     try {
         // Validate the username
         let usernameCheck = await validateUsername(userData.username);
@@ -54,7 +55,7 @@ const userRegister = async (userData, role, res) => {
     }
 };
 
-const userLogin = async (userCredentials, res) => {
+export const userLogin = async (userCredentials, res) => {
     try {
         let {username, password} = userCredentials;
 
@@ -115,10 +116,10 @@ const userLogin = async (userCredentials, res) => {
 };
 
 // Passport middleware Get user
-const userAuthenticated = passport.authenticate('jwt', {session: false});
+export const userAuthenticated = passport.authenticate('jwt', {session: false});
 
 // Serialize User Info (Reduce Password)
-const serializeUser = user => {
+export const serializeUser = user => {
     return {
         _id: user._id,
         name: user.name,
@@ -131,27 +132,19 @@ const serializeUser = user => {
 };
 
 // Check User role for RBAC
-const checkUserRole = roles => (req, res, next) =>
+export const checkUserRole = roles => (req, res, next) =>
     !roles.includes(req.user.role)
         ? res.status(401).json('Unauthorized')
         : next();
 
 // Validate username
-const validateUsername = async (username) => {
+export const validateUsername = async (username) => {
     let user = await User.findOne({username});
     return !user;
 };
 
 // Validate email
-const validateEmail = async (email) => {
+export const validateEmail = async (email) => {
     let user = await User.findOne({email});
     return !user;
 };
-
-module.exports = {
-    userRegister,
-    userLogin,
-    userAuthenticated,
-    serializeUser,
-    checkUserRole
-}
