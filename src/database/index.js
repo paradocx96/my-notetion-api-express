@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { success, error } = require('consola');
 
 // App Config
-const { APP_DB } = require('../config');
+const { APP_DB } = require('../constants');
 
 // DB Config
 const connectDB = async () => {
