@@ -4,7 +4,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const {success, error} = require('consola');
 const routes = require('./routes');
-const {APP_PORT} = require('./config');
+const {APP_PORT} = require('./constants');
 const connectDB = require('./database');
 
 // App Initialization
