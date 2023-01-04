@@ -1,5 +1,7 @@
+import {getAllUsers} from '../controllers/User';
+import {userRegister, userLogin, userAuthenticated, serializeUser, checkUserRole} from '../controllers/Auth';
+
 const userRouter = require('express').Router();
-const {userRegister, userLogin, userAuthenticated, serializeUser, checkUserRole} = require('../controllers/Auth');
 
 // User Registration Route
 userRouter.post('/register', async (req, res) => {
@@ -14,6 +16,11 @@ userRouter.post('/login', async (req, res) => {
 // Profile Route (Get user info)
 userRouter.get('/profile', userAuthenticated, async (req, res) => {
     return res.json(serializeUser(req.user));
+});
+
+// Get All Users
+userRouter.get('/get', userAuthenticated, async (req, res) => {
+    return await getAllUsers(req, res);
 });
 
 // User Protected Route

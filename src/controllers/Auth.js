@@ -1,4 +1,5 @@
 import User from '../models/User';
+import {findBy, insertUser} from '../repository/User';
 
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
@@ -37,7 +38,7 @@ export const userRegister = async (userData, role, res) => {
         });
 
         // Save the user
-        await newUser.save();
+        await insertUser(newUser);
 
         // Return response
         return res.status(201).json({
@@ -60,7 +61,7 @@ export const userLogin = async (userCredentials, res) => {
         let {username, password} = userCredentials;
 
         // Find user by username
-        const user = await User.findOne({username});
+        const user = await findBy({username});
         if (!user) {
             return res.status(404).json({
                 message: 'Username not found. Invalid credentials!!!',
@@ -139,12 +140,12 @@ export const checkUserRole = roles => (req, res, next) =>
 
 // Validate username
 export const validateUsername = async (username) => {
-    let user = await User.findOne({username});
+    let user = await findBy({username});
     return !user;
 };
 
 // Validate email
 export const validateEmail = async (email) => {
-    let user = await User.findOne({email});
+    let user = await findBy({email})
     return !user;
 };
