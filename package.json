@@ -2,7 +2,7 @@
   "name": "nma-api",
   "version": "1.0.0",
   "description": "Notes-Management-API",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node -r esm .",
     "dev": "nodemon -r esm ."
