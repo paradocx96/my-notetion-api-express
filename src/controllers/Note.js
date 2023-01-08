@@ -1,9 +1,9 @@
-import {insertNote, findAllNote, findBy, findDelete, findUpdate} from '../repository/Note';
-import logger from "../utils/logger";
-import Note from "../models/Note";
+const {insertNote, findAllNote, findBy, findDelete, findUpdate} = require('../repository/Note');
+const logger = require("../utils/logger");
+const Note = require("../models/Note");
 
 // Insert Note
-export const createNote = async (req, res) => {
+const createNote = async (req, res) => {
     try {
         let {body} = req;
         let note = new Note({
@@ -34,7 +34,7 @@ export const createNote = async (req, res) => {
 };
 
 // Find All Notes
-export const getAllNotes = async (req, res) => {
+const getAllNotes = async (req, res) => {
     try {
         let result = await findAllNote({});
         if (!result) {
@@ -56,7 +56,7 @@ export const getAllNotes = async (req, res) => {
 };
 
 // Find By ID
-export const getNoteById = async (req, res) => {
+const getNoteById = async (req, res) => {
     try {
         let result = await findBy({_id: req.params.id});
         if (!result) {
@@ -78,7 +78,7 @@ export const getNoteById = async (req, res) => {
 };
 
 // Find By Author
-export const getNoteByAuthor = async (req, res) => {
+const getNoteByAuthor = async (req, res) => {
     try {
         let result = await findAllNote({author: req.params.id});
         if (!result) {
@@ -100,7 +100,7 @@ export const getNoteByAuthor = async (req, res) => {
 };
 
 // Update Note
-export const updateNote = async (req, res) => {
+const updateNote = async (req, res) => {
     try {
         let findNote = await findBy({_id: req.params.id});
         if (!findNote) {
@@ -130,7 +130,7 @@ export const updateNote = async (req, res) => {
 };
 
 // Delete Note
-export const deleteNote = async (req, res) => {
+const deleteNote = async (req, res) => {
     try {
         let findNote = await findBy({_id: req.params.id});
         if (!findNote) {
@@ -158,3 +158,12 @@ export const deleteNote = async (req, res) => {
         });
     }
 };
+
+module.exports = {
+    createNote,
+    getAllNotes,
+    getNoteByAuthor,
+    getNoteById,
+    updateNote,
+    deleteNote
+}

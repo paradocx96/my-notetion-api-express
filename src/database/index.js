@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
 const { success, error } = require('consola');
+const mongoose = require('mongoose');
 
 // App Config
 const { APP_DB } = require('../constants');

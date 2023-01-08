@@ -1,8 +1,6 @@
-import {userAuthenticated, checkUserRole} from '../controllers/Auth';
-import {createNote, getAllNotes, deleteNote, updateNote, getNoteByAuthor, getNoteById} from '../controllers/Note';
-
-const express = require('express');
-const router = express.Router();
+const {createNote, getAllNotes, deleteNote, updateNote, getNoteByAuthor, getNoteById} = require('../controllers/Note');
+const {userAuthenticated, checkUserRole} = require('../controllers/Auth');
+const router = require('express').Router();
 
 // Insert Note
 router.post('/create', userAuthenticated, async (req, res) => {
