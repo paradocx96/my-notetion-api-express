@@ -18,7 +18,7 @@ router.get('/profile', userAuthenticated, async (req, res) => {
 });
 
 // Get All Users
-userRouter.get('/get', userAuthenticated, async (req, res) => {
+router.get('/get', userAuthenticated, async (req, res) => {
     return await getAllUsers(req, res);
 });
 

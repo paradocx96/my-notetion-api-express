@@ -1,11 +1,11 @@
-const cors = require('cors');
-const express = require('express');
-const passport = require('passport');
-const bodyParser = require('body-parser');
 const {success, error} = require('consola');
-const routes = require('./routes');
+const bodyParser = require('body-parser');
 const {APP_PORT} = require('./constants');
 const connectDB = require('./database');
+const passport = require('passport');
+const express = require('express');
+const routes = require('./routes');
+const cors = require('cors');
 
 // App Initialization
 const app = express();

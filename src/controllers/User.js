@@ -1,8 +1,8 @@
-import logger from "../utils/logger";
-import {findAll} from '../repository/User';
+const {findAll} = require('../repository/User');
+const logger = require("../utils/logger");
 
 // Find All Users
-export const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
     try {
         let result = await findAll({});
         if (!result) {
@@ -22,3 +22,7 @@ export const getAllUsers = async (req, res) => {
         });
     }
 };
+
+module.exports = {
+    getAllUsers
+}
