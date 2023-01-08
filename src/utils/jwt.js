@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
 const {APP_SECRET, JWT_EXPIRE} = require('../constants');
+const jwt = require('jsonwebtoken');
 
 // Generate token
 const generateToken = (data) => {

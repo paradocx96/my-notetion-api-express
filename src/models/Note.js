@@ -1,5 +1,5 @@
-import {Schema, model} from 'mongoose';
-import Paginator from 'mongoose-paginate-v2';
+const Paginator = require('mongoose-paginate-v2');
+const {Schema, model} = require('mongoose');
 
 const NoteSchema = new Schema(
     {
@@ -28,6 +28,4 @@ const NoteSchema = new Schema(
 );
 
 NoteSchema.plugin(Paginator);
-
-const Note = model("notes", NoteSchema);
-export default Note;
+module.exports = model('notes', NoteSchema);

@@ -1,7 +1,5 @@
-import {userRegister, userLogin, userAuthenticated, serializeUser, checkUserRole} from '../controllers/Auth';
-
-const express = require('express');
-const router = express.Router();
+const {userRegister, userLogin, userAuthenticated, serializeUser, checkUserRole} = require('../controllers/Auth');
+const router = require('express').Router();
 
 // User Registration Route
 router.post('/register', async (req, res) => {

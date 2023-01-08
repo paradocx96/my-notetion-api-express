@@ -1,12 +1,11 @@
-import User from '../models/User';
-
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const User = require('../models/User');
 const logger = require("../utils/logger");
 const {generateToken} = require('../utils/jwt')
 const {BCRYPT_SALT_ROUNDS} = require('../constants');
 
-export const userRegister = async (userData, role, res) => {
+const userRegister = async (userData, role, res) => {
     try {
         // Validate the username
         let usernameCheck = await validateUsername(userData.username);
@@ -55,7 +54,7 @@ export const userRegister = async (userData, role, res) => {
     }
 };
 
-export const userLogin = async (userCredentials, res) => {
+const userLogin = async (userCredentials, res) => {
     try {
         let {username, password} = userCredentials;
 
@@ -116,10 +115,10 @@ export const userLogin = async (userCredentials, res) => {
 };
 
 // Passport middleware Get user
-export const userAuthenticated = passport.authenticate('jwt', {session: false});
+const userAuthenticated = passport.authenticate('jwt', {session: false});
 
 // Serialize User Info (Reduce Password)
-export const serializeUser = user => {
+const serializeUser = user => {
     return {
         _id: user._id,
         name: user.name,
@@ -132,19 +131,27 @@ export const serializeUser = user => {
 };
 
 // Check User role for RBAC
-export const checkUserRole = roles => (req, res, next) =>
+const checkUserRole = roles => (req, res, next) =>
     !roles.includes(req.user.role)
         ? res.status(401).json('Unauthorized')
         : next();
 
 // Validate username
-export const validateUsername = async (username) => {
+const validateUsername = async (username) => {
     let user = await User.findOne({username});
     return !user;
 };
 
 // Validate email
-export const validateEmail = async (email) => {
+const validateEmail = async (email) => {
     let user = await User.findOne({email});
     return !user;
 };
+
+module.exports = {
+    userRegister,
+    userLogin,
+    userAuthenticated,
+    serializeUser,
+    checkUserRole,
+}

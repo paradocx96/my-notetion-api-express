@@ -1,8 +1,7 @@
-import User from '../models/User';
-
-const {APP_SECRET} = require('../constants');
 const {Strategy, ExtractJwt} = require('passport-jwt');
+const {APP_SECRET} = require('../constants');
 const logger = require("../utils/logger");
+const User = require( '../models/User');
 
 const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
