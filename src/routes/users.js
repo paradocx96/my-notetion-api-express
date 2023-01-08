@@ -1,4 +1,5 @@
 const {userRegister, userLogin, userAuthenticated, serializeUser, checkUserRole} = require('../controllers/Auth');
+const {getAllUsers} = require('../controllers/User');
 const router = require('express').Router();
 
 // User Registration Route
@@ -14,6 +15,11 @@ router.post('/login', async (req, res) => {
 // Profile Route (Get user info)
 router.get('/profile', userAuthenticated, async (req, res) => {
     return res.json(serializeUser(req.user));
+});
+
+// Get All Users
+userRouter.get('/get', userAuthenticated, async (req, res) => {
+    return await getAllUsers(req, res);
 });
 
 // User Protected Route

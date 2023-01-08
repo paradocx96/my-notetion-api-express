@@ -4,6 +4,7 @@ const User = require('../models/User');
 const logger = require("../utils/logger");
 const {generateToken} = require('../utils/jwt')
 const {BCRYPT_SALT_ROUNDS} = require('../constants');
+const {findBy, insertUser} = require('../repository/User');
 
 const userRegister = async (userData, role, res) => {
     try {
@@ -36,7 +37,7 @@ const userRegister = async (userData, role, res) => {
         });
 
         // Save the user
-        await newUser.save();
+        await insertUser(newUser);
 
         // Return response
         return res.status(201).json({
@@ -59,7 +60,7 @@ const userLogin = async (userCredentials, res) => {
         let {username, password} = userCredentials;
 
         // Find user by username
-        const user = await User.findOne({username});
+        const user = await findBy({username});
         if (!user) {
             return res.status(404).json({
                 message: 'Username not found. Invalid credentials!!!',
