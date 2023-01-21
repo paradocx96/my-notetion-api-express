@@ -7,7 +7,7 @@ const createNote = async (req, res) => {
     try {
         let {body} = req;
         let note = new Note({
-            author: req.user._id,
+            author: req.user.username,
             ...body,
         })
 

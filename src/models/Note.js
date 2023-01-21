@@ -15,9 +15,13 @@ const NoteSchema = new Schema(
             type: Boolean,
             default: false
         },
+        // author: {
+        //     ref: "users",
+        //     type: Schema.Types.ObjectId,
+        // },
         author: {
-            ref: "users",
-            type: Schema.Types.ObjectId,
+            type: String,
+            required: true
         },
         created: {
             type: Date,
