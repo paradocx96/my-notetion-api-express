@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paradocx96/note-management-api-express.git"
+    "url": "git+https://github.com/paradocx96/my-notetion-api-express.git"
   },
   "author": "paradocx96",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/paradocx96/note-management-api-express/issues"
+    "url": "https://github.com/paradocx96/my-notetion-api-express/issues"
   },
-  "homepage": "https://github.com/paradocx96/note-management-api-express#readme",
+  "homepage": "https://github.com/paradocx96/my-notetion-api-express#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
